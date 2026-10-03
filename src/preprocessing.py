@@ -71,7 +71,7 @@ def prepare_data():
 
 
 
-    return (X_train_preprocessed, X_test_preprocessed, y_train, y_test, X_train, X_test)
+    return (X_train_preprocessed, X_test_preprocessed, y_train, y_test, X_train, X_test, house_data)
 
 def get_feature_names():
 
@@ -88,8 +88,9 @@ def get_feature_names():
     encoder.fit(house_data[categorical_features])
 
     encoded_feature_names = encoder.get_feature_names_out(categorical_features)
+    processed_features_name = list(numerical_features).copy() + list(encoded_feature_names).copy()
 
-    return numerical_features, categorical_features, encoded_feature_names
+    return numerical_features, categorical_features, encoded_feature_names, processed_features_name
 
 def error_analysis(y_true, y_pred):
     error = y_true - y_pred
@@ -108,4 +109,13 @@ def error_analysis(y_true, y_pred):
     print("R-squared:", r_squared)
 
 
-    
+def add_bias(X_train, X_test):
+    X_train_with_bias = np.c_[
+        np.ones(X_train.shape[0]), 
+        X_train]
+
+    X_test_with_bias = np.c_[
+        np.ones(X_test.shape[0]), 
+        X_test]
+
+    return X_train_with_bias, X_test_with_bias
