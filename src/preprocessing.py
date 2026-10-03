@@ -72,3 +72,40 @@ def prepare_data():
 
 
     return (X_train_preprocessed, X_test_preprocessed, y_train, y_test, X_train, X_test)
+
+def get_feature_names():
+
+    project_root = Path(__file__).resolve().parent.parent
+    train_path = project_root / "data" / "train.csv"
+
+    house_data = pd.read_csv(train_path)
+    house_data = house_data.drop(columns=["Property_ID", "Price_INR_Lakhs"])
+
+    numerical_features = house_data.select_dtypes(include="number").columns.tolist()
+    categorical_features = house_data.select_dtypes(include="object").columns.tolist()
+
+    encoder = OneHotEncoder(drop='first', handle_unknown='ignore')
+    encoder.fit(house_data[categorical_features])
+
+    encoded_feature_names = encoder.get_feature_names_out(categorical_features)
+
+    return numerical_features, categorical_features, encoded_feature_names
+
+def error_analysis(y_true, y_pred):
+    error = y_true - y_pred
+
+    mae_error = np.mean(np.abs(error))
+    mse_error = np.mean(error **2)
+    rmse_error = np.sqrt(mse_error)
+
+    ss_res = np.sum(error ** 2)
+    ss_tot = np.sum((y_true - np.mean(y_true)) ** 2)
+    r_squared = 1 - (ss_res / ss_tot)
+
+    print("Mean Absolute Error (MAE):", mae_error)
+    print("Mean Squared Error (MSE):", mse_error)
+    print("Root Mean Squared Error (RMSE):", rmse_error)
+    print("R-squared:", r_squared)
+
+
+    
