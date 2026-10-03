@@ -65,5 +65,10 @@ def prepare_data():
     
     X_test_preprocessed = np.hstack([X_test_numeric_scaled, 
                                      X_test_categorical_encoded.toarray()])
+    encoded_feature_names = encoder.get_feature_names_out(
+    categorical_features
+    )
 
-    return X_train_preprocessed, X_test_preprocessed, y_train, y_test
+
+
+    return (X_train_preprocessed, X_test_preprocessed, y_train, y_test, X_train, X_test)
