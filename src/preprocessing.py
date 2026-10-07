@@ -65,6 +65,7 @@ def prepare_data():
     
     X_test_preprocessed = np.hstack([X_test_numeric_scaled, 
                                      X_test_categorical_encoded.toarray()])
+    
     encoded_feature_names = encoder.get_feature_names_out(
     categorical_features
     )
@@ -88,6 +89,7 @@ def get_feature_names():
     encoder.fit(house_data[categorical_features])
 
     encoded_feature_names = encoder.get_feature_names_out(categorical_features)
+
     processed_features_name = list(numerical_features).copy() + list(encoded_feature_names).copy()
 
     return numerical_features, categorical_features, encoded_feature_names, processed_features_name
