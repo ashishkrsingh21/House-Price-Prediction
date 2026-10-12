@@ -142,4 +142,3 @@ class DecisionTreeRegression:
             result.append(self.predict_one(x))
 
         return np.array(result)
-
