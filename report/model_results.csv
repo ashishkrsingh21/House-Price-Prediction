@@ -1,0 +1,2 @@
+Model,Experiment,Target,Feature_Configuration,MAE,RMSE,R2
+Linear Regression,LR_LogTarget_FeatureSelected_AreaSquared_CityLocality,log1p,"Super_Area + Super_Area² + Age + City_Distance + City + Locality + City×Locality; Carpet_Area, BHK, Bathrooms, Floor_Number, Total_Floors, Parking, Lift_Available, Gated_Community, Distance_to_Metro, Furnishing_Status, Property_Type, Age², Distance² removed",32.15841466751261,68.35930162581997,0.7889346587222893
