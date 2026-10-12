@@ -127,7 +127,7 @@ class DecisionTreeRegression:
 
         if node.prediction is not None:
             return node.prediction
-
+        
         if X < node.threshold:
             return self.predict_one(X, node.left)
 
