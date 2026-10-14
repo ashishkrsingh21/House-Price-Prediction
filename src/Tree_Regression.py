@@ -5,12 +5,16 @@ class Node:
     def __init__(self,
                  feature_index = None,
                  threshold=None,
-                 prediction=None
+                 prediction=None,
+                 sse_reduction=None,
+                 n_samples=None
                  ):
 
         self.feature_index = feature_index
         self.threshold = threshold
         self.prediction = prediction
+        self.sse_reduction = sse_reduction
+        self.n_samples = n_samples
 
         self.left = None
         self.right = None
@@ -104,11 +108,6 @@ class DecisionTreeRegression:
             return np.mean(y)
 
         def build_tree(X, y, depth):
-
-            if len(y) < self.min_samples_split:
-                prediction = create_leaf(y)
-                return Node(prediction=prediction)
-
             if self.max_depth is not None and depth >= self.max_depth:
                 prediction = create_leaf(y)
                 return Node(prediction=prediction)
@@ -122,14 +121,16 @@ class DecisionTreeRegression:
             if best_feature_index is None:
                 prediction = create_leaf(y)
                 return Node(prediction=prediction)
-
+            
             X_left, y_left, X_right, y_right = split_data(X,
                                                           y,
                                                           best_feature_index,
                                                           best_threshold
                                                             )
 
-            node = Node(feature_index=best_feature_index,
+            node = Node(n_samples=len(y),
+                        sse_reduction=calculate_sse(y) - min_sse,
+                        feature_index=best_feature_index,
                         threshold=best_threshold
                         )
 
@@ -162,3 +163,27 @@ class DecisionTreeRegression:
             result.append(self.predict_one(x))
 
         return np.array(result)
+
+    def calculate_feature_importance(self, n_features, n_samples):
+        importance = np.zeros(n_features)
+
+        def traverse(node):
+            if node is None or node.prediction is not None:
+                return
+
+            weighted_reduced_sse = (node.n_samples/
+                                    n_samples) * node.sse_reduction
+
+            importance[node.feature_index] += weighted_reduced_sse
+
+            traverse(node.left)
+            traverse(node.right)
+
+        traverse(self.root)
+
+        total_importance = np.sum(importance)
+
+        if total_importance > 0:
+            importance = importance / total_importance
+
+        return importance
