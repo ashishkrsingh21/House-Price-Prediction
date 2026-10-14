@@ -20,17 +20,19 @@ class Node:
         self.right = None
 
 
-class DecisionTreeRegression:
+class DecisionTreeRegressor:
 
     def __init__(self,
                  max_depth=None,
                  min_samples_split=2,
-                 min_samples_leaf=1
+                 min_samples_leaf=1,
+                 max_features=None
                  ):
 
         self.max_depth = max_depth
         self.min_samples_split = min_samples_split
         self.min_samples_leaf = min_samples_leaf
+        self.max_features = max_features
 
     def fit(self,X,y):
         def calculate_sse(y):
@@ -63,8 +65,20 @@ class DecisionTreeRegression:
             best_threshold = None
 
             n_features = X.shape[1]
+            
+            if self.max_features is None:
+                    feature_indices = np.arange(n_features)
 
-            for feature_index in range(n_features):
+            else:
+                if self.max_features < 1 or self.max_features > n_features:
+                    raise ValueError("max_features must be between 1 and n_features")
+
+                feature_indices = np.random.choice(
+                    n_features,
+                    size=self.max_features,
+                    replace=False
+        )
+            for feature_index in feature_indices:
 
                 X_feature = X[:, feature_index]
 
