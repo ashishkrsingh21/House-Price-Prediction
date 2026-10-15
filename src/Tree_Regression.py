@@ -36,8 +36,9 @@ class DecisionTreeRegressor:
 
     def fit(self,X,y):
         def calculate_sse(y):
-            mean_y = np.mean(y)
-            sse = np.sum((y-mean_y)**2)
+            sum_y_2 = np.sum(y**2)
+            sum_y = np.sum(y)
+            sse = sum_y_2 - ((sum_y ** 2)/len(y))
             return sse
 
         def calculate_split_sse(X,y,threshold):
@@ -65,10 +66,9 @@ class DecisionTreeRegressor:
             best_threshold = None
 
             n_features = X.shape[1]
-            
-            if self.max_features is None:
-                    feature_indices = np.arange(n_features)
 
+            if self.max_features is None:
+                feature_indices = np.arange(n_features)
             else:
                 if self.max_features < 1 or self.max_features > n_features:
                     raise ValueError("max_features must be between 1 and n_features")
@@ -77,7 +77,8 @@ class DecisionTreeRegressor:
                     n_features,
                     size=self.max_features,
                     replace=False
-        )
+                )
+
             for feature_index in feature_indices:
 
                 X_feature = X[:, feature_index]
@@ -86,18 +87,51 @@ class DecisionTreeRegressor:
                 X_sorted = X_feature[sorted_indices]
                 y_sorted = y[sorted_indices]
 
-                for i in range(len(X_sorted) - 1):
+                # Calculate cumulative statistics once for this feature
+                cumulative_sum = np.cumsum(y_sorted)
+                cumulative_sum_squared = np.cumsum(y_sorted ** 2)
+
+                # Calculate total statistics
+                total_sum = cumulative_sum[-1]
+                total_sum_squared = cumulative_sum_squared[-1]
+                n_samples = len(y_sorted)
+
+                # Evaluate candidate splits
+                for i in range(n_samples - 1):
 
                     if X_sorted[i] != X_sorted[i + 1]:
 
                         threshold = (X_sorted[i] + X_sorted[i + 1]) / 2
 
-                        sse = calculate_split_sse(
-                            X_sorted,
-                            y_sorted,
-                            threshold
+                        # Number of observations in each group
+                        n_left = i + 1
+                        n_right = n_samples - n_left
+
+                        # Enforce minimum leaf size
+                        if (n_left < self.min_samples_leaf or
+                                n_right < self.min_samples_leaf):
+                            continue
+
+                        # Left group statistics
+                        sum_left = cumulative_sum[i]
+                        sum_squared_left = cumulative_sum_squared[i]
+
+                        # Right group statistics
+                        sum_right = total_sum - sum_left
+                        sum_squared_right = total_sum_squared - sum_squared_left
+
+                        # Calculate SSE for each group
+                        left_sse = (
+                            sum_squared_left - (sum_left ** 2 / n_left)
                         )
 
+                        right_sse = (
+                            sum_squared_right - (sum_right ** 2 / n_right)
+                        )
+
+                        sse = left_sse + right_sse
+
+                        # Keep the best split
                         if sse < min_sse:
                             min_sse = sse
                             best_feature_index = feature_index
