@@ -858,7 +858,7 @@ python src/Random_Forest.py
 ```
 
 ```bash
-python src/Knn_Regression.py
+python src/knn_Regression.py
 ```
 
 After Gradient Boosting has been implemented:
