@@ -794,7 +794,7 @@ For reproducibility, package versions should be recorded after verifying the wor
 Replace the placeholder with the actual GitHub repository URL.
 
 ```bash
-git clone <YOUR_REPOSITORY_URL>
+git clone git@github.com:ashishkrsingh21/House-Price-Prediction.git
 ```
 
 ### Step 2: Enter the Project Directory
@@ -827,12 +827,6 @@ If `requirements.txt` is available:
 
 ```bash
 pip install -r requirements.txt
-```
-
-Alternatively:
-
-```bash
-pip install numpy pandas matplotlib seaborn scikit-learn
 ```
 
 ### Step 5: Download the Dataset
@@ -1075,12 +1069,12 @@ Deployment should follow model evaluation and pipeline development.
 | Linear Regression | Completed |
 | Decision Tree Regression | Completed |
 | Random Forest Regression | Completed |
-| KNN Regression | Implemented |
+| KNN Regression | Completed |
 | Gradient Boosting Regression | In Progress |
 | XGBoost Regression | Planned |
 | LightGBM Regression | Planned |
 | CatBoost Regression | Planned |
-| Additional Regression Models | Optional |
+| Additional Regression Models | Planned |
 | Cross-Validation and Model Comparison | Planned |
 | Final Prediction Pipeline | Planned |
 | Deployment | Optional |
@@ -1182,13 +1176,13 @@ The project has progressed through foundational regression algorithms and is mov
 
 | Component | Status |
 |---|---|
-| Exploratory Data Analysis | Implemented |
-| Data Cleaning and Preprocessing | Implemented |
+| Exploratory Data Analysis | Completed |
+| Data Cleaning and Preprocessing | Completed |
 | Feature Selection Experiments | Ongoing |
 | Linear Regression | Completed |
 | Decision Tree Regression | Completed |
 | Random Forest Regression | Completed |
-| KNN Regression | Implemented |
+| KNN Regression | Completed |
 | Gradient Boosting Regression | In Progress |
 | Advanced Boosting Algorithms | Planned |
 | Robust Model Comparison | Planned |
