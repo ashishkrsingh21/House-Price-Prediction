@@ -1,5 +1,5 @@
 import numpy as np
-from src.Tree_Regression import DecisionTreeRegressor
+from src.models.decision_tree_regression import DecisionTreeRegressor
 
 class RandomForestRegressor:
     def __init__(self,
