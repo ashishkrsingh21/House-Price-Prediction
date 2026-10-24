@@ -2,9 +2,9 @@ import pandas as pd
 from pathlib import Path
 from sklearn.model_selection import train_test_split
 
-def data_loader():
+def load_and_split_data():
 
-    project_root = Path(__file__).resolve().parent.parent
+    project_root = Path(__file__).resolve().parents[2]
     train_path = project_root / "data" / "train.csv"
 
     house_data = pd.read_csv(train_path)
@@ -23,4 +23,4 @@ def data_loader():
     X_test = X_test.drop(columns=["Property_ID"])
 
 
-    return X_train, y_train, X_test, y_test, house_data
+    return (X_train, y_train, X_test, y_test, house_data)
