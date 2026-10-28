@@ -247,12 +247,12 @@ The following values are available in the recorded project history. They are inc
 
 | Model / experiment | MAE | RMSE | R² |
 |---|---:|---:|---:|
-| Linear Regression - recorded feature configuration | 32.1584 | 68.3593 | 0.7889
-| Decision Tree — depth 8 | 38.5983 | 75.3679 | 0.7434 |
-| Random Forest — recorded configuration | 33.4593 | 69.1857 | 0.7838 |
-| Gradient Boosting — 310 estimators | 35.3533 | 69.0814 | 0.7787 |
-| KNN — recorded feature configuration | 34.7310 | 71.3325 | 0.7702 |
-| SVR — ongoing
+| Linear Regression | 32.1584 | 68.3593 | 0.7889 |
+| Decision Tree | 38.5983 | 75.3679 | 0.7434 |
+| Random Forest | 33.4593 | 69.1857 | 0.7838 |
+| Gradient Boosting | 35.3533 | 69.0814 | 0.7787 |
+| KNN | 34.7310 | 71.3325 | 0.7702 |
+| SVR | ongoing | ongoing | ongoin |
 
 **Comparability limitation:** These results come from historical experiments. The available history does not establish that all rows use the same feature set, preprocessing pipeline, target representation, split, or evaluation protocol. The table must not be used as a definitive model ranking.
 
@@ -281,6 +281,9 @@ Clone the repository using its actual GitHub URL:
 
 ```bash
 git clone git@github.com:ashishkrsingh21/House-Price-Prediction.git
+```
+
+```bash
 cd House-Price-Prediction
 ```
 
