@@ -1,713 +1,209 @@
+# House Price Prediction — India
 
-# House Price Prediction Using Machine Learning
+**A Machine Learning Regression Project | From-Scratch Implementations | Model Evaluation & Optimization**
 
-A supervised machine learning project focused on predicting residential property prices using regression algorithms. This project explores data preprocessing, feature engineering, model implementation, hyperparameter tuning, and systematic model evaluation.
+[![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)](https://www.python.org/)
+[![NumPy](https://img.shields.io/badge/NumPy-Numerical_Computing-013243?logo=numpy)](https://numpy.org/)
+[![Pandas](https://img.shields.io/badge/Pandas-Data_Analysis-150458?logo=pandas)](https://pandas.pydata.org/)
+[![Status](https://img.shields.io/badge/Status-In_Progress-orange)](#project-status)
+[![Project Type](https://img.shields.io/badge/Project-Supervised_Machine_Learning-purple)](#project-overview)
 
 ## Table of Contents
 
-1. [Project Overview](#1-project-overview)
-2. [Objectives](#2-objectives)
-3. [Dataset](#3-dataset)
-4. [Project Workflow](#4-project-workflow)
-5. [Exploratory Data Analysis](#5-exploratory-data-analysis)
-6. [Feature Engineering and Selection](#6-feature-engineering-and-selection)
-7. [Machine Learning Models](#7-machine-learning-models)
-8. [Model Evaluation](#8-model-evaluation)
-9. [Experiment Tracking](#9-experiment-tracking)
-10. [Project Structure](#10-project-structure)
-11. [Technologies Used](#11-technologies-used)
-12. [Installation and Setup](#12-installation-and-setup)
-13. [Running the Project](#13-running-the-project)
-14. [House Price Prediction Plan](#14-house-price-prediction-plan)
-15. [Challenges and Lessons Learned](#15-challenges-and-lessons-learned)
-16. [Future Improvements](#16-future-improvements)
-17. [Project Status](#17-project-status)
-18. [Learning Outcomes](#18-learning-outcomes)
-19. [Dataset Reference](#19-dataset-reference)
-20. [License](#20-license)
+- [Project Overview](#project-overview)
+- [Objectives](#objectives)
+- [Dataset](#dataset)
+- [Project Workflow](#project-workflow)
+- [Repository Structure](#repository-structure)
+- [Exploratory Data Analysis](#exploratory-data-analysis)
+- [Data Preprocessing and Feature Engineering](#data-preprocessing-and-feature-engineering)
+- [Machine Learning Models](#machine-learning-models)
+- [Model Performance](#model-performance)
+- [Error Analysis and Findings](#error-analysis-and-findings)
+- [Implementation Details](#implementation-details)
+- [Installation and Setup](#installation-and-setup)
+- [Running the Project](#running-the-project)
+- [Results and Experiment Tracking](#results-and-experiment-tracking)
+- [Challenges and Lessons Learned](#challenges-and-lessons-learned)
+- [Limitations](#limitations)
+- [Future Work](#future-work)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
 
 ---
 
-## 1. Project Overview
+## Project Overview
 
-House Price Prediction is a supervised machine learning project designed to estimate residential property prices using property characteristics, location information, and other relevant attributes.
+House Price Prediction is an end-to-end supervised machine learning project that investigates how residential property characteristics influence housing prices across Indian cities.
 
-The project uses the Indian Urban House Price Prediction dataset available on Kaggle.
+The project uses a dataset of Indian urban properties to build, evaluate, and compare regression models. Its primary objective is not merely to obtain accurate predictions, but also to understand the mathematical foundations, implementation details, optimization procedures, and practical limitations of different regression algorithms.
 
-Rather than relying on a single algorithm, the project follows an experimental approach. Multiple regression algorithms are implemented and evaluated to understand their mathematical foundations, predictive behavior, limitations, and ability to generalize to unseen properties.
+A central aspect of this project is the **manual implementation of multiple machine learning algorithms**. Rather than treating machine learning libraries as black boxes, the project explores the underlying mechanics of regression models, including parameter estimation, loss minimization, tree construction, bootstrap sampling, nearest-neighbor prediction, boosting, and support vector optimization.
 
-The primary objective is not merely to train a model that produces predictions. It is to understand how different algorithms learn, how feature selection affects predictive performance, how hyperparameters influence model behavior, and how to determine whether a model generalizes effectively.
+The project follows an iterative workflow:
 
-### Key Highlights
+1. Understand the dataset through exploratory data analysis.
+2. Clean and transform the data.
+3. Establish a baseline for comparison.
+4. Implement regression algorithms.
+5. Evaluate models using multiple metrics.
+6. Investigate prediction errors and model behavior.
+7. Experiment with hyperparameters and feature configurations.
+8. Select and document promising models.
+9. Develop a reproducible prediction and evaluation pipeline.
 
-- Supervised learning for a real-estate price prediction problem.
-- Implementation of multiple regression algorithms.
-- Exploratory data analysis and data preprocessing.
-- Feature selection and feature engineering.
-- Investigation of correlated and redundant features.
-- Hyperparameter tuning and model optimization.
-- Evaluation using MAE, RMSE, and R².
-- Prediction error analysis across different price ranges.
-- Investigation of underfitting, overfitting, bias, and variance.
-- A structured roadmap for advanced regression models.
-- Development of a reproducible machine learning workflow.
+The project is being developed incrementally, with additional experiments, software engineering improvements, and model comparisons planned.
 
-## 2. Objectives
+## Objectives
 
-### Primary Objective
+The main objectives are:
 
-Develop a regression model capable of predicting residential property prices while maintaining reliable performance on unseen observations.
+- Develop a complete regression workflow using a real-world housing dataset.
+- Understand the statistical and mathematical foundations of supervised learning.
+- Implement regression algorithms from scratch where practical.
+- Study the effects of feature selection, categorical encoding, scaling, and target transformations.
+- Compare linear, tree-based, instance-based, ensemble, and margin-based regression approaches.
+- Investigate underfitting, overfitting, outliers, and generalization performance.
+- Analyze prediction errors across price ranges, localities, and cities.
+- Build reusable Python modules instead of maintaining all logic in a single notebook.
+- Record experimental configurations and evaluation results.
+- Establish a foundation for more advanced machine learning projects.
 
-### Technical Objectives
+## Dataset
 
-1. Understand the structure and characteristics of the dataset.
-2. Perform exploratory data analysis.
-3. Identify missing values, outliers, and potential data-quality issues.
-4. Investigate relationships between input features and property prices.
-5. Identify redundant or uninformative features.
-6. Implement multiple regression algorithms.
-7. Understand the mathematical foundations of each algorithm.
-8. Experiment with different feature configurations and transformations.
-9. Optimize model hyperparameters.
-10. Evaluate models using appropriate regression metrics.
-11. Analyze prediction errors and systematic biases.
-12. Compare algorithms under consistent evaluation conditions.
-13. Develop a reproducible training and prediction pipeline.
+### Source
 
-### Learning Objectives
+The project uses the **Indian Urban House Price Prediction** dataset obtained from Kaggle.
 
-The project also explores the following machine learning concepts:
+- **Platform:** Kaggle
+- **Dataset:** Indian Urban House Price Prediction
+- **Observations:** Approximately 80,000
+- **Original columns:** 18
+- **Dataset size:** Approximately 11 MB
+- **Target variable:** `Price_INR_Lakhs`
+- **Prediction task:** Supervised regression
 
-- Linear regression and optimization.
-- Decision trees and recursive feature partitioning.
-- Ensemble learning.
-- Bootstrap sampling and bagging.
-- Boosting and sequential learning.
-- Distance-based regression.
-- Bias-variance trade-off.
-- Regularization.
-- Feature scaling and categorical encoding.
-- Cross-validation.
-- Hyperparameter optimization.
-- Generalization and data leakage prevention.
+The exact dataset URL should be added here before publication.
 
----
+### Dataset split
 
-## 3. Dataset
+| Subset | Observations | Proportion |
+|---|---:|---:|
+| Training set | 64,000 | 80% |
+| Test set | 16,000 | 20% |
+| Total | 80,000 | 100% |
 
-### Dataset Source
+The training set is used to fit model parameters. The test set is intended for final evaluation on unseen observations. Any hyperparameter tuning should use a separate validation set or an appropriate cross-validation procedure rather than repeatedly optimizing against the final test set.
 
-**Dataset:** Indian Urban House Price Prediction
+### Feature categories
 
-**Platform:** Kaggle
+The dataset contains numerical and categorical property information.
 
-**Dataset URL:**
+| Category | Examples |
+|---|---|
+| Property size | Super area, carpet area |
+| Property characteristics | BHK, bathrooms, floor information, parking |
+| Property age | Age of property |
+| Location | City, locality type, distance to city centre |
+| Property classification | Property type |
+| Furnishing | Furnishing status |
+| Target | Price in Indian rupee lakhs |
 
-https://www.kaggle.com/competitions/indian-urban-house-price-prediction/data
+The exact set of usable predictors varies between experiments because different feature configurations were tested.
 
-The dataset contains synthetic residential property data designed to simulate housing markets across Indian cities.
+### Target variable
 
-It is intended for machine learning experimentation, regression modeling, feature engineering, and model evaluation.
+The target is `Price_INR_Lakhs`, representing the property price in lakhs of Indian rupees.
 
-**Important:** The dataset is synthetic. Its observations should not be interpreted as actual property transactions or as a definitive representation of real-world Indian property prices.
+For example, a target value of `100` represents ₹100 lakh, or ₹1 crore.
 
-### Dataset Features
+The project investigates prediction in the original price scale as well as experiments involving target transformations. Results obtained using different target scales must be converted consistently before they are compared.
 
-The dataset includes property characteristics, location information, amenities, and a target price.
+### Important data considerations
 
-The following table summarizes the features described for this dataset. The exact column names and availability should be checked against the downloaded CSV files.
-
-| Feature | Description | Type |
-|---|---|---|
-| `Property_ID` | Property identifier | Identifier |
-| `City` | City where the property is located | Categorical |
-| `Locality_Type` | Classification of the locality | Categorical |
-| `Distance_to_Metro_km` | Distance to the nearest metro station | Numerical |
-| `Distance_to_City_Center_km` | Distance to the city center | Numerical |
-| `Property_Type` | Type of residential property | Categorical |
-| `BHK` | Number of bedrooms | Numerical |
-| `Bathrooms` | Number of bathrooms | Numerical |
-| `Super_Area_SqFt` | Super built-up area in square feet | Numerical |
-| `Carpet_Area_SqFt` | Carpet area in square feet | Numerical |
-| `Floor_Number` | Floor on which the property is located | Numerical |
-| `Total_Floors` | Total number of floors in the building | Numerical |
-| `Age_of_Property` | Age of the property in years | Numerical |
-| `Furnishing_Status` | Furnishing condition | Categorical |
-| `Parking` | Parking availability | Binary or categorical |
-| `Lift_Available` | Lift availability | Binary or categorical |
-| `Gated_Community` | Gated-community indicator | Binary or categorical |
-| `Price_INR_Lakhs` | Property price in lakhs of Indian rupees | Target |
-
-The table is intended as a dataset reference. Before using it as a definitive schema, compare every column against the actual downloaded dataset.
-
-### Target Variable
-
-The target variable documented for the competition is:
-
-`Price_INR_Lakhs`
-
-The objective is to predict the property price in lakhs of Indian rupees.
-
-Mathematically, the regression problem is represented as:
-
-\[
-\hat{y}=f(X)
-\]
-
-Where:
-
-- \(X\) represents the input features.
-- \(y\) represents the actual property price.
-- \(\hat{y}\) represents the predicted property price.
-- \(f\) represents the learned regression function.
-
-### Dataset Files
-
-The competition may provide files such as:
-
-- `train.csv`: Training observations and target values.
-- `test.csv`: Observations for which predictions are required.
-- `sample_submission.csv`: Example submission format.
-- `metaData.csv`: Supplemental dataset information, if provided.
-
-The exact filenames must be verified against the downloaded competition files.
-
-The Kaggle competition test set and a locally held-out test set serve different purposes. A local test set should be kept separate from model tuning, while the competition test set is used to generate predictions in the required submission format.
+- Property identifiers such as `Property_ID` are excluded from the predictive feature matrix.
+- Features derived directly from the target must not be used as predictors.
+- Price-per-square-foot information requires particular care: if it is calculated using the target price, including it as a feature would introduce target leakage.
+- Extreme property prices can substantially affect squared-error metrics.
+- Different cities and locality categories may have different price distributions and prediction difficulty.
 
 ---
 
-## 4. Project Workflow
+## Project Workflow
 
-The project follows a structured machine learning workflow.
+The project is organized into stages so that data preparation, model development, and evaluation can be investigated separately.
 
-```text
-                    DATASET
-                       |
-                       v
-              DATA UNDERSTANDING
-                       |
-                       v
-          EXPLORATORY DATA ANALYSIS
-                       |
-                       v
-                DATA CLEANING
-                       |
-                       v
-            FEATURE ENGINEERING
-                       |
-                       v
-            TRAIN-TEST SEPARATION
-                       |
-                       v
-             DATA PREPROCESSING
-                       |
-                       v
-           BASELINE MODEL TRAINING
-                       |
-                       v
-             MODEL IMPLEMENTATION
-                       |
-                       v
-           HYPERPARAMETER TUNING
-                       |
-                       v
-              MODEL EVALUATION
-                       |
-                       v
-             ERROR DISTRIBUTION
-                  ANALYSIS
-                       |
-                       v
-              MODEL COMPARISON
-                       |
-                       v
-             FINAL MODEL SELECTION
-                       |
-                       v
-           PREDICTION ON NEW DATA
-```
+### 1. Exploratory Data Analysis
 
-### Step 1: Data Understanding
+The initial analysis examines:
 
-Inspect the dataset structure, data types, feature definitions, target variable, and data quality.
+- Dataset dimensions and column types.
+- Numerical and categorical feature distributions.
+- Summary statistics.
+- Relationships between property characteristics and prices.
+- Differences between cities and locality categories.
+- Potential outliers and unusually expensive properties.
+- Feature correlations and possible multicollinearity.
+- The distribution and spread of the target variable.
 
-### Step 2: Exploratory Data Analysis
+### 2. Data cleaning
 
-Investigate feature distributions, correlations, outliers, and relationships between property characteristics and prices.
+The cleaning stage prepares the original dataset for modelling.
 
-### Step 3: Data Cleaning
+Work includes examining missing values, inspecting feature validity, handling unsuitable columns, and preparing numerical and categorical features for subsequent transformations.
 
-Identify missing values, invalid observations, duplicate records, inconsistent categories, and other data-quality issues.
+The final cleaning rules should be documented alongside the cleaning notebook so that the training and inference pipelines apply consistent transformations.
 
-### Step 4: Feature Engineering
+### 3. Feature engineering and preprocessing
 
-Evaluate relevant features, investigate redundancy, and experiment with transformations.
+The preprocessing workflow includes:
 
-### Step 5: Train-Test Separation
+- Separating features from the target.
+- Removing identifier columns.
+- Splitting data into training and test subsets.
+- Scaling numerical features where appropriate.
+- Encoding categorical variables.
+- Constructing the final feature matrix.
+- Managing feature names and column ordering.
+- Investigating alternative feature configurations.
 
-Separate the available training data into appropriate subsets for model development and final evaluation.
+Transformers should be fitted using training data only and then applied to validation and test data. This prevents information from evaluation data from leaking into the training process.
 
-### Step 6: Model Implementation
+### 4. Baseline modelling
 
-Implement regression algorithms in separate modules and train them using controlled experiments.
+A baseline establishes a reference point for determining whether more complex algorithms provide meaningful improvements.
 
-### Step 7: Hyperparameter Tuning
+A simple baseline, such as predicting the training-target mean, provides a useful minimum benchmark for MAE, RMSE, and R². The baseline's final numerical results should be recorded in the experiment log.
 
-Investigate how model parameters influence predictive performance and generalization.
+### 5. Model implementation
 
-### Step 8: Evaluation
+The project investigates multiple regression algorithms, with emphasis on understanding their mathematical foundations and implementing their core operations manually.
 
-Calculate regression metrics and analyze prediction errors.
+### 6. Hyperparameter tuning
 
-### Step 9: Model Comparison
+Experiments investigate the effects of parameters such as tree depth, number of estimators, learning rate, number of neighbors, regularization strength, and optimization settings.
 
-Compare models using consistent evaluation conditions and select a promising candidate.
+### 7. Evaluation and error analysis
 
-### Step 10: Prediction Pipeline
-
-Develop a reusable workflow that applies the correct preprocessing and generates predictions for unseen properties.
+Models are evaluated using numerical metrics and group-level error analysis. The goal is to understand not only how accurate a model is overall, but also where and why it fails.
 
 ---
 
-## 5. Exploratory Data Analysis
+## Repository Structure
 
-Exploratory Data Analysis (EDA) is used to understand the dataset before model training.
-
-The project investigates relationships between property prices and the available features.
-
-### Areas of Investigation
-
-- Distribution of property prices.
-- Distribution of property areas.
-- Relationships between area and price.
-- Correlations between area-related features.
-- Price differences across cities.
-- Price differences across locality types.
-- Relationships between property age and price.
-- Relationships between structural characteristics and price.
-- Distribution of extreme observations.
-- Prediction error distributions.
-
-### Visualization Techniques
-
-Potential visualizations include:
-
-- Histograms.
-- Box plots.
-- Scatter plots.
-- Correlation heatmaps.
-- Actual-versus-predicted plots.
-- Residual plots.
-- Price-group error comparisons.
-
-EDA should help formulate and test hypotheses. Correlation alone does not establish that a feature will improve predictive performance.
-
----
-
-## 6. Feature Engineering and Selection
-
-Feature selection is an important part of this project.
-
-The objective is not to use every available feature. It is to identify a feature configuration that provides useful predictive information for the algorithm being evaluated.
-
-### 6.1 Feature Selection Experiments
-
-The project has investigated different combinations of property features.
-
-Based on the experiments conducted so far:
-
-- `BHK` was evaluated but was not retained in the selected feature configuration because it did not provide sufficient additional predictive value in the tested experiments.
-- `Bathrooms` was evaluated but was not retained in the selected feature configuration for the same reason.
-- `Carpet_Area` was investigated because of its high correlation with `Super_Area`.
-- Location, property area, age, and distance-related features have been considered in the selected configurations.
-
-These findings apply to the tested feature configurations. They do not imply that BHK or Bathrooms are universally useless for house-price prediction.
-
-A feature's contribution depends on the dataset, model, other selected features, and evaluation procedure.
-
-### 6.2 Multicollinearity
-
-Multicollinearity occurs when input features contain strongly overlapping information.
-
-For example, `Super_Area` and `Carpet_Area` both describe aspects of property size.
-
-Including both may introduce redundant information.
-
-In Linear Regression, strong multicollinearity can make coefficient estimates unstable.
-
-Tree-based models are affected differently, although redundant features can still influence split selection.
-
-The project has investigated configurations that exclude `Carpet_Area` because of its high correlation with `Super_Area`.
-
-Feature removal should be justified through data analysis and controlled experiments rather than correlation alone.
-
-### 6.3 Categorical Encoding
-
-Features such as `City`, `Locality_Type`, `Property_Type`, and `Furnishing_Status` require appropriate preprocessing when used by algorithms that expect numerical inputs.
-
-Possible approaches include:
-
-- One-hot encoding.
-- Ordinal encoding when a meaningful order exists.
-- Other encoding strategies appropriate to the model and dataset.
-
-Encoding must be fitted on training data and applied consistently to validation and test data.
-
-### 6.4 Feature Scaling
-
-Feature scaling is particularly important for distance-based algorithms such as K-Nearest Neighbors.
-
-Without scaling, features with larger numerical ranges can dominate distance calculations.
-
-Standardization is defined as:
-
-\[
-z=\frac{x-\mu}{\sigma}
-\]
-
-Where:
-
-- \(x\) is the original value.
-- \(\mu\) is the training-set mean.
-- \(\sigma\) is the training-set standard deviation.
-
-Scaling parameters must be calculated using training data to prevent data leakage.
-
-Decision Trees, Random Forests, and conventional tree-based Gradient Boosting generally do not require standardization.
-
-### 6.5 Target Transformation
-
-A logarithmic target transformation can be investigated if the price distribution is strongly right-skewed.
-
-For nonnegative prices, one possible transformation is:
-
-\[
-y'=\log(1+y)
-\]
-
-Predictions must be converted back to the original scale before interpreting errors in price units:
-
-\[
-\hat{y}=\exp(\hat{y}')-1
-\]
-
-Target transformation should be evaluated experimentally rather than assumed to improve every model.
-
----
-
-## 7. Machine Learning Models
-
-The project implements regression algorithms as separate modules.
-
-The emphasis is on understanding the mathematical foundations, implementation details, and behavior of each algorithm.
-
-### 7.1 Linear Regression
-
-**Status: Implemented**
-
-Linear Regression models the relationship between input features and the target using a linear combination of the features.
-
-\[
-\hat{y}=\beta_0+\beta_1x_1+\beta_2x_2+\cdots+\beta_px_p
-\]
-
-Ordinary least squares estimates coefficients by minimizing the sum of squared residuals.
-
-#### Objectives
-
-- Establish a baseline model.
-- Understand the regression objective.
-- Investigate feature selection.
-- Experiment with target transformations.
-- Evaluate the limitations of linear relationships.
-
-#### Limitations
-
-- May underfit nonlinear relationships.
-- Can be sensitive to outliers.
-- Can produce unstable coefficient estimates under strong multicollinearity.
-- Requires appropriate categorical encoding.
-
-### 7.2 Decision Tree Regression
-
-**Status: Implemented**
-
-Decision Tree Regression partitions the feature space into regions using feature-based splits.
-
-Each leaf produces a prediction based on the training observations assigned to that region.
-
-Regression trees commonly select splits that reduce squared prediction error.
-
-#### Objectives
-
-- Understand recursive feature partitioning.
-- Model nonlinear relationships.
-- Investigate feature interactions.
-- Study tree depth and minimum leaf size.
-- Understand overfitting and the bias-variance trade-off.
-
-#### Important Hyperparameters
-
-- `max_depth`
-- `min_samples_split`
-- `min_samples_leaf`
-- `max_features`
-
-### 7.3 Random Forest Regression
-
-**Status: Implemented**
-
-Random Forest combines predictions from multiple decision trees.
-
-It commonly uses bootstrap samples and randomized feature selection to construct an ensemble.
-
-For regression, the ensemble prediction is typically the average of individual tree predictions:
-
-\[
-\hat{y}=\frac{1}{B}\sum_{b=1}^{B}\hat{y}_b
-\]
-
-Where \(B\) is the number of trees.
-
-#### Objectives
-
-- Understand ensemble learning.
-- Investigate bootstrap sampling.
-- Understand bagging.
-- Study variance reduction.
-- Compare ensemble predictions with a single Decision Tree.
-- Investigate tree complexity and feature selection.
-
-#### Important Hyperparameters
-
-- `n_estimators`
-- `max_depth`
-- `min_samples_split`
-- `min_samples_leaf`
-- `max_features`
-- `bootstrap`
-
-### 7.4 K-Nearest Neighbors Regression
-
-**Status: Implemented**
-
-KNN Regression predicts a property's price using nearby observations in feature space.
-
-For an unweighted KNN regressor:
-
-\[
-\hat{y}(x)=\frac{1}{k}\sum_{i\in N_k(x)}y_i
-\]
-
-Where \(N_k(x)\) contains the \(k\) nearest training observations.
-
-#### Objectives
-
-- Understand distance-based prediction.
-- Investigate feature scaling.
-- Study the number of neighbors.
-- Evaluate different feature configurations.
-- Analyze the limitations of distance-based learning.
-
-#### Important Hyperparameters
-
-- `n_neighbors`
-- `weights`
-- `metric`
-- `p`
-
-KNN performance depends on the selected features, scaling method, distance metric, and distribution of training observations.
-
-### 7.5 Gradient Boosting Regression
-
-**Status: In Progress**
-
-Gradient Boosting Regression is the next algorithm being developed.
-
-Unlike Random Forest, which generally builds trees independently and aggregates their predictions, Gradient Boosting builds an additive model sequentially.
-
-Each new learner attempts to improve the current ensemble by following information derived from the selected loss function.
-
-A simplified additive model is:
-
-\[
-F_M(x)=F_0(x)+\sum_{m=1}^{M}\eta h_m(x)
-\]
-
-Where:
-
-- \(F_0(x)\) is the initial prediction.
-- \(h_m(x)\) is the contribution of the \(m\)-th learner.
-- \(M\) is the number of boosting stages.
-- \(\eta\) is the learning rate.
-
-For squared-error regression, boosting can be understood through the residuals of the current model.
-
-The algorithm repeatedly fits a new learner to information about current prediction errors and adds its contribution to the ensemble.
-
-#### Objectives
-
-- Understand boosting mathematically.
-- Distinguish bagging from boosting.
-- Implement sequential model improvement.
-- Understand residuals and gradients.
-- Study learning rate and the number of trees.
-- Investigate overfitting and generalization.
-
-#### Important Hyperparameters
-
-- `n_estimators`
-- `learning_rate`
-- `max_depth`
-- `min_samples_split`
-- `min_samples_leaf`
-- `subsample`
-- `loss`
-
-The model will be implemented in a dedicated source module and evaluated against the existing models.
-
----
-
-## 8. Model Evaluation
-
-The project uses multiple regression metrics to evaluate predictive performance.
-
-### 8.1 Mean Absolute Error (MAE)
-
-MAE measures the average absolute difference between actual and predicted values.
-
-\[
-MAE=\frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y}_i|
-\]
-
-Lower MAE indicates smaller average absolute prediction errors.
-
-MAE is expressed in the same units as the target.
-
-### 8.2 Root Mean Squared Error (RMSE)
-
-RMSE measures the square root of the average squared prediction error.
-
-\[
-RMSE=\sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}
-\]
-
-RMSE penalizes large prediction errors more heavily than MAE.
-
-The Kaggle competition uses RMSE as its evaluation metric.
-
-### 8.3 Coefficient of Determination (R²)
-
-R² measures predictive performance relative to predicting the evaluation-set target mean.
-
-\[
-R^2=1-\frac{\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}{\sum_{i=1}^{n}(y_i-\bar{y})^2}
-\]
-
-Interpretation:
-
-- \(R^2=1\): Perfect predictions.
-- \(R^2=0\): Equivalent squared-error performance to predicting the evaluation-set mean.
-- \(R^2<0\): Worse squared-error performance than the mean-prediction baseline.
-
-A high R² does not guarantee small errors for every property or price range.
-
-### 8.4 Signed Prediction Error
-
-Define prediction error as:
-
-\[
-e_i=y_i-\hat{y}_i
-\]
-
-Under this convention:
-
-- Positive error indicates underprediction.
-- Negative error indicates overprediction.
-
-The sign convention should remain consistent across experiments.
-
-### 8.5 Price-Group Error Analysis
-
-Overall metrics can conceal weaknesses in particular price ranges.
-
-To investigate this, prediction errors can be grouped by actual property price.
-
-Useful statistics include:
-
-- MAE.
-- Mean Error.
-- Median Error.
-- RMSE.
-- Number of observations.
-
-This analysis helps identify whether the model systematically underpredicts expensive properties or performs poorly in particular price ranges.
-
-### 8.6 Fair Model Comparison
-
-For meaningful comparisons:
-
-- Use consistent evaluation data.
-- Fit preprocessing only on training data.
-- Use validation data or cross-validation for model selection.
-- Avoid repeatedly tuning against the final test set.
-- Evaluate all models on the same target scale.
-- Record experiment configurations.
-- Preserve a final held-out test set.
-
-Training performance alone should not determine the selected model.
-
----
-
-## 9. Experiment Tracking
-
-Every experiment should record its configuration and results.
-
-A suggested record structure is:
-
-```python
-{
-    "Model": "Model Name",
-    "Target": "Raw Price or Log Target",
-    "Feature_Configuration": "Selected Features",
-    "Hyperparameters": {},
-    "Metrics": {
-        "MAE": None,
-        "RMSE": None,
-        "R2": None
-    }
-}
-```
-
-This is a template rather than a record of an actual experiment.
-
-### Questions Investigated
-
-- Does a nonlinear model outperform Linear Regression?
-- How does tree depth affect generalization?
-- Does Random Forest improve on a single Decision Tree?
-- How does feature scaling affect KNN?
-- Does removing redundant features improve performance?
-- Does target transformation improve predictive performance?
-- Does Gradient Boosting improve on existing models?
-- Which model performs consistently across price ranges?
-
-A model should be selected based on measured performance, generalization, and the intended use of its predictions.
-
----
-
-## 10. Project Structure
-
-The following is a proposed repository structure. Update filenames and directories to match the actual implementation.
+The following is the **working structure reconstructed from the project history**, not a verified listing of the current filesystem. Keep the actual filenames and locations synchronized with the repository.
 
 ```text
 House-Price-Prediction/
 │
 ├── README.md
+├── requirements.txt
+├── .gitignore
 │
 ├── data/
-│   ├── raw/
-│   └── processed/
+│   ├── train.csv
+│   └── README.md
 │
 ├── notebooks/
 │   ├── 01_data_exploration.ipynb
@@ -715,95 +211,550 @@ House-Price-Prediction/
 │   └── 03_model_training.ipynb
 │
 ├── src/
-│   ├── Linear_Regression.py
+│   ├── __init__.py
+│   ├── preprocessing/
+│   │   ├── __init__.py
+│   │   └── data_loader.py
+│   ├── preprocessing.py
+│   ├── linear_regression.py
 │   ├── Tree_Regression.py
-│   ├── Random_Forest.py
-│   ├── Knn_Regression.py
-│   └── Gradient_Boosting_Regression.py
+│   ├── random_forest.py
+│   ├── gradient_boosting.py
+│   ├── knn_regression.py
+│   ├── svr.py
+│   ├── transformer.py
+│   ├── feature_names.py
+│   ├── evaluation.py
+│   └── experiment_logger.py
 │
-├── results/
-│   ├── experiments/
-│   ├── metrics/
-│   └── plots/
+├── report/
+│   └── model_results.csv
 │
-├── models/
-│
-├── requirements.txt
-│
-└── .gitignore
+└── tests/
+    └── ...
 ```
 
-### Directory Responsibilities
+**Structure notes:**
 
-| Directory | Purpose |
+- The three notebooks listed above are the notebooks explicitly discussed during the project.
+- Some model filenames shown here describe the logical modules and may differ from the names in the current repository.
+- The project has used both a `preprocessing.py` module and a `src/preprocessing/` package in its development discussions. Avoid maintaining duplicate implementations of the same responsibility without a clear reason.
+- Add a file to the tree only when it exists in the repository. Planned tests, modules, and reports should not be represented as completed files prematurely.
+
+### Responsibilities of the main components
+
+| Component | Responsibility |
 |---|---|
-| `data/raw/` | Original dataset files |
-| `data/processed/` | Cleaned or transformed data |
-| `notebooks/` | EDA, preprocessing, and experiments |
-| `src/` | Machine learning implementations |
-| `results/experiments/` | Experiment configurations and observations |
-| `results/metrics/` | Evaluation results |
-| `results/plots/` | Visualizations and error analysis |
-| `models/` | Saved trained models, if required |
-
-This structure is a proposal. The actual repository should reflect the files that exist.
-
-Large datasets and generated model files should generally be excluded from Git unless there is a specific reason to include them.
+| `01_data_exploration.ipynb` | Explore the dataset, distributions, relationships, and anomalies. |
+| `02_data_cleaning.ipynb` | Investigate data quality and prepare clean modelling data. |
+| `03_model_training.ipynb` | Run model experiments and compare configurations. |
+| `data_loader.py` | Load data, separate predictors and target, and provide split datasets. |
+| `transformer.py` | Scale numerical variables and encode categorical variables. |
+| `feature_names.py` | Maintain interpretable names for transformed features. |
+| `linear_regression.py` | Implement linear regression and parameter estimation. |
+| `Tree_Regression.py` | Implement decision tree regression. |
+| `random_forest.py` | Implement bootstrap-based tree ensembles. |
+| `gradient_boosting.py` | Implement sequential boosting for regression. |
+| `knn_regression.py` | Implement distance-based regression. |
+| `svr.py` | Implement support vector regression experiments. |
+| `evaluation.py` | Calculate regression metrics and organize evaluation results. |
+| `experiment_logger.py` | Record model configurations and experimental outcomes. |
+| `report/model_results.csv` | Store model comparison results, when generated by the logging workflow. |
+| `tests/` | Validate preprocessing, model behavior, and evaluation functions. |
 
 ---
 
-## 11. Technologies Used
+## Exploratory Data Analysis
 
-The project uses Python and common data science libraries.
+Exploratory analysis is important because housing prices are influenced by several interacting variables and often contain a long upper tail of expensive properties.
 
-| Technology | Purpose |
-|---|---|
-| Python | Main programming language |
-| NumPy | Numerical computation |
-| Pandas | Data manipulation |
-| Matplotlib | Visualization |
-| Seaborn | Statistical visualization |
-| Scikit-learn |Preprocessing, and evaluation utilities |
+### Target distribution
 
-The exact dependencies should match the imports used in the repository.
+The recorded test-target summary from one experiment is:
 
-### Example Requirements
+| Statistic | Value (₹ lakhs) |
+|---|---:|
+| Count | 16,000 |
+| Mean | 142.787 |
+| Standard deviation | 148.800 |
+| Minimum | 5.000 |
+| 25th percentile | 54.385 |
+| Median | 96.460 |
+| 75th percentile | 175.790 |
+| Maximum | 3,216.464 |
+
+The mean is substantially higher than the median, indicating a right-skewed target distribution in this test split. A small number of expensive properties can exert considerable influence on the mean and squared-error-based metrics.
+
+### Implications for modelling
+
+1. A single global error metric may conceal substantial differences in performance across price ranges.
+2. Linear models may struggle to represent nonlinear relationships and interactions.
+3. Tree-based models can represent nonlinear decision boundaries, but they may still struggle with prices beyond the range represented adequately in training data.
+4. Large errors on expensive properties can dominate MSE and RMSE.
+5. A model's performance should be examined across cities, locality types, and price groups rather than assessed using R² alone.
+
+The reported summary is an experimental snapshot and should be regenerated from the current dataset if the split, preprocessing, or target definition changes.
+
+---
+
+## Data Preprocessing and Feature Engineering
+
+### Numerical and categorical features
+
+Numerical features describe quantities such as property area, age, and distance. Categorical features describe properties such as city, locality type, property type, and furnishing status.
+
+These groups require different preprocessing operations.
+
+**Numerical features**
+
+- Inspect distributions and extreme values.
+- Investigate missing or invalid observations.
+- Scale features when required by the algorithm.
+- Examine the effect of feature removal and transformation.
+
+**Categorical features**
+
+- Identify categorical columns explicitly.
+- Encode categories without introducing unintended ordinal relationships.
+- Keep the transformed feature order consistent between training and inference.
+- Handle unseen categories if the final pipeline must support new properties.
+
+### Feature scaling
+
+Standardization was used in the preprocessing workflow and is particularly relevant for algorithms that depend on distances or feature magnitudes.
+
+For a feature \(x\), standardization is defined as
+
+\[
+z = \frac{x-\mu_{\mathrm{train}}}{\sigma_{\mathrm{train}}}
+\]
+
+where the mean and standard deviation are estimated from the training data.
+
+Tree-based models generally do not require standardization, although using a consistent pipeline can simplify comparisons when its effects are controlled.
+
+### One-hot encoding
+
+Categorical features are converted into numerical indicator columns.
+
+For example, a city feature may produce columns such as `City_Mumbai` and `City_Delhi`. A category is represented by its corresponding indicator rather than an arbitrary numerical ranking.
+
+The transformed feature matrix depends on the categories present and the encoder configuration.
+
+### Recorded 19-feature configuration
+
+One processed feature configuration contained the following 19 base features:
 
 ```text
-numpy
-pandas
-matplotlib
-scikit-learn
+Super_Area_SqFt
+Age_of_Property
+Distance_to_City_Center_km
+City_Bangalore
+City_Chandigarh
+City_Chennai
+City_Delhi
+City_Hyderabad
+City_Jaipur
+City_Kolkata
+City_Mumbai
+City_Pune
+Locality_Type_Mid-Range
+Locality_Type_Premium
+Property_Type_Builder Floor
+Property_Type_Independent House
+Property_Type_Villa
+Furnishing_Status_Semi-Furnished
+Furnishing_Status_Unfurnished
 ```
 
-For reproducibility, package versions should be recorded after verifying the working environment.
+This is one experimental configuration, not a universal definition of the final feature set. Other experiments used additional features, including carpet area, or different combinations of encoded columns.
+
+A bias column was also added in some manual implementations. The number of model parameters therefore depends on the feature configuration and whether the intercept is represented explicitly.
+
+### Feature selection experiments
+
+Several experiments investigated the effect of removing or retaining variables, including:
+
+- Bathrooms
+- BHK
+- Floor number
+- Total floors
+- Parking
+- Gated community
+- Carpet area
+
+The purpose was to assess whether individual variables improved generalization or introduced redundancy, noise, or instability.
+
+A feature should not be removed solely because it correlates with another feature. Its effect should be assessed through controlled validation experiments, with preprocessing and other model settings held constant.
+
+### Target transformations
+
+Experiments also investigated the possibility of transforming the target distribution.
+
+A log transformation can reduce the influence of very large prices, but it changes the optimization objective and the scale on which errors are measured. Predictions must be transformed back carefully before being evaluated in the original currency units.
+
+Results from raw-price and transformed-target experiments should be reported separately.
 
 ---
 
-## 12. Installation and Setup
+## Machine Learning Models
+
+The project covers several families of regression algorithms. The implementations below are based on the algorithms and experiments documented during development.
+
+### 1. Linear Regression
+
+**Implementation:** Manual implementation using the Normal Equation.
+
+Linear regression models the target as a linear combination of input features:
+
+\[
+\hat{y}=X\theta
+\]
+
+The Normal Equation estimates the parameters by minimizing the sum of squared residuals. In a full-rank setting, its familiar form is
+
+\[
+\theta=(X^\top X)^{-1}X^\top y
+\]
+
+Direct matrix inversion is not numerically ideal in all circumstances. A practical implementation should consider solving the linear system directly or using a numerically stable least-squares method.
+
+**What this model provides**
+
+- A simple reference for nonlinear models.
+- An interpretable relationship between input features and predictions.
+- An opportunity to study least squares, matrix operations, multicollinearity, and numerical stability.
+
+A historical experiment reported R² of approximately 0.78. This is an earlier result, not a verified final score for the current pipeline.
+
+### 2. Decision Tree Regression
+
+**Implementation:** Manual tree construction.
+
+The tree recursively partitions the feature space using feature thresholds. Each terminal node returns a prediction based on the training observations assigned to that region.
+
+Parameters investigated include:
+
+- `max_depth`
+- `min_samples_split`
+- `min_samples_leaf`
+
+**Key observations**
+
+- Increasing depth initially improved predictive performance.
+- Performance peaked around depth 8 in one recorded experiment.
+- Increasing complexity beyond the useful range can lead to overfitting.
+- Leaf-size and split-size constraints influence the bias-variance trade-off.
+
+The implementation was developed in `src/Tree_Regression.py`.
+
+### 3. Random Forest Regression
+
+**Implementation:** Manual ensemble built using decision tree regressors.
+
+Random Forest combines predictions from multiple trees trained on bootstrap samples. Feature subsampling can reduce correlation between individual trees.
+
+The project implemented bootstrap sampling and investigated the effects of ensemble size, tree depth, minimum split size, minimum leaf size, and feature selection.
+
+**Recorded configuration**
+
+| Hyperparameter | Value |
+|---|---:|
+| Number of estimators | 150 |
+| Maximum depth | 15 |
+| Minimum samples to split | 50 |
+| Minimum samples per leaf | 10 |
+| Maximum features | 20 |
+
+The corresponding recorded test results were MAE 33.4593, RMSE 69.1857, and R² 0.783801.
+
+This is one of the stronger recorded experiments. It should be treated as the leading historical result only until all models are evaluated on a common, unchanged test set.
+
+### 4. Gradient Boosting Regression
+
+**Implementation:** Manual sequential boosting using regression trees.
+
+Gradient Boosting builds an ensemble sequentially, with later trees learning to reduce the residual errors or loss gradients left by earlier predictions.
+
+The experiments investigated:
+
+- Number of estimators.
+- Learning rate.
+- Tree depth.
+- Minimum leaf size.
+- Minimum split size.
+
+One documented experiment with 310 estimators produced:
+
+| Metric | Value |
+|---|---:|
+| MAE | 35.3533 |
+| MSE | 4,772.2360 |
+| RMSE | 69.0814 |
+| R² | 0.778705 |
+
+A later tuning experiment identified a promising configuration with 690 estimators, learning rate 0.2, maximum depth 2, and minimum leaf size 6. The complete metrics for that configuration were not established in the available project record.
+
+The 310-estimator result must not be presented as the result of the 690-estimator configuration.
+
+### 5. K-Nearest Neighbors Regression
+
+**Implementation:** Manual KNN regression.
+
+KNN predicts a target using the target values of nearby training observations. The selected neighbors are determined by a distance function, and their target values are aggregated to produce a prediction.
+
+The implementation required particular attention to NumPy and pandas indexing when mapping nearest-neighbor indices back to target values.
+
+A later experiment using a reduced feature configuration recorded:
+
+| Metric | Value |
+|---|---:|
+| MAE | 34.7310 |
+| MSE | 5,088.3239 |
+| RMSE | 71.3325 |
+| R² | 0.770175 |
+
+An earlier experiment using 10 neighbors performed less effectively, with MAE approximately 50.161 and R² approximately 0.579. The results illustrate the importance of feature selection and distance calculations for KNN.
+
+### 6. Support Vector Regression (SVR)
+
+**Implementation:** Manual optimization experiments.
+
+SVR seeks a function that balances model complexity with prediction errors outside an epsilon-insensitive tolerance. Unlike ordinary least squares, errors within the epsilon tube do not contribute to the standard epsilon-insensitive loss.
+
+The experiments investigated:
+
+- Learning rate.
+- Epsilon.
+- Regularization parameter \(C\).
+- Number of iterations.
+- Optimization convergence behavior.
+- Support-vector counts.
+
+The project explored subgradient-based optimization and iterative parameter updates rather than treating a library implementation as a black box.
+
+A recent recorded experiment produced:
+
+| Metric | Value |
+|---|---:|
+| MAE | 43.3410 |
+| MSE | 8,596.4366 |
+| RMSE | 92.7170 |
+| R² | 0.611724 |
+| Iterations used | 84,142 |
+| Maximum iterations | 85,000 |
+| Support vectors | 56,357 |
+
+These figures describe the recorded SVR experiment. The iteration count alone does not establish that the optimization converged successfully; convergence criteria and termination status should also be checked.
+
+SVR has so far been less competitive than the strongest recorded tree ensemble, although comparisons must use identical data splits, feature configurations, and target scales to support a definitive ranking.
+
+---
+
+## Model Performance
+
+The following table summarizes the recorded experiments available in the project history.
+
+### Historical results
+
+| Model | MAE | MSE | RMSE | R² |
+|---|---:|---:|---:|---:|
+| Decision Tree Regression — selected depth-8 experiment | 38.5983 | — | 75.3679 | 0.743436 |
+| Random Forest Regression — recorded configuration | 33.4593 | — | 69.1857 | 0.783801 |
+| Gradient Boosting — 310 estimators | 35.3533 | 4,772.2360 | 69.0814 | 0.778705 |
+| KNN Regression — later feature configuration | 34.7310 | 5,088.3239 | 71.3325 | 0.770175 |
+| SVR — recent optimization experiment | 43.3410 | 8,596.4366 | 92.7170 | 0.611724 |
+
+A dash indicates that the corresponding metric was not available in the recorded result used for this table.
+
+**Interpretation:** Random Forest has the strongest recorded combination of MAE and R² among the listed experiments. Gradient Boosting has a slightly lower RMSE in its recorded run, but its MAE and R² are weaker. These results are useful for identifying promising candidates, not for declaring a definitive winner across all experiments.
+
+### Why these results are provisional
+
+The project has used different feature sets and model configurations across experiments. Some models were also evaluated during separate stages of development.
+
+A rigorous final comparison requires:
+
+1. The same training, validation, and test observations.
+2. A consistent target definition and target scale.
+3. Consistent metric implementations.
+4. Training-only fitting of all preprocessing transformations.
+5. A documented feature configuration for every model.
+6. A clear distinction between validation results used for tuning and final test results.
+7. Recorded hyperparameters, random seeds where applicable, and experiment identifiers.
+
+The final README should be updated after a common evaluation run establishes the comparable results.
+
+---
+
+## Error Analysis and Findings
+
+Overall model scores do not fully describe prediction quality. Error analysis has been used to examine systematic differences across price ranges, locality categories, and cities.
+
+### Error by locality type
+
+A recorded error-analysis experiment produced the following mean absolute errors:
+
+| Locality type | MAE (₹ lakhs) |
+|---|---:|
+| Affordable | 21.388 |
+| Mid-Range | 37.071 |
+| Premium | 104.043 |
+
+The much higher error for premium properties indicates that the model has greater difficulty predicting prices in this segment.
+
+Possible contributing factors include greater price variability, high-value outliers, nonlinear price relationships, and insufficient representation of expensive properties. These are hypotheses to investigate rather than established causal explanations.
+
+### Error by price group
+
+Another recorded experiment produced:
+
+| Price group (₹ lakhs) | MAE (₹ lakhs) |
+|---|---:|
+| 0–50 | 23.739 |
+| 50–100 | 24.524 |
+| 100–200 | 43.073 |
+| 200–500 | 83.979 |
+| 500+ | 335.810 |
+
+Absolute prediction error rises substantially in the more expensive price groups.
+
+This does not necessarily mean that relative accuracy deteriorates at the same rate. A model can have a large absolute error on a high-priced property but a smaller percentage error than on a cheaper property. Both absolute and relative error measures should therefore be considered, with appropriate care around zero or near-zero target values.
+
+### City-level performance
+
+Mumbai was identified as a particularly challenging segment in the recorded analysis. Some actual property prices exceeded ₹2,000 lakh, contributing to large prediction errors.
+
+This finding supports further investigation of:
+
+- City-specific target distributions.
+- Extreme-value observations.
+- Sample counts within high-price segments.
+- Model behavior outside densely represented price ranges.
+- Whether a single global model is adequate for all cities.
+
+It does not, by itself, establish that separate city-specific models would outperform a shared model.
+
+### Prediction distribution
+
+One historical prediction run had these summary statistics:
+
+| Statistic | Actual target | Predicted target |
+|---|---:|---:|
+| Mean | 142.787 | 135.355 |
+| Standard deviation | 148.800 | 94.588 |
+| Minimum | 5.000 | 18.610 |
+| Maximum | 3,216.464 | 772.190 |
+
+The predicted distribution was narrower than the actual target distribution, and its maximum was substantially lower.
+
+This is consistent with underprediction of some high-priced properties and limited coverage of the extreme upper tail. The summary is from a historical run, however, and should not be attributed to every model.
+
+### Key analytical findings
+
+- Housing prices have a broad and right-skewed distribution.
+- Expensive properties are more difficult to predict accurately in absolute terms.
+- Model performance depends on feature selection and preprocessing.
+- Tree ensembles are promising candidates for this dataset.
+- High overall R² does not eliminate significant errors for individual properties.
+- Price-range and locality-level evaluation adds information that aggregate metrics cannot provide.
+
+---
+
+## Implementation Details
+
+The project emphasizes understanding the mechanics of the algorithms and building a modular codebase.
+
+### Manual algorithm development
+
+The manual implementations are intended to make the underlying operations explicit, including:
+
+- Matrix-based parameter estimation for linear regression.
+- Recursive splitting and leaf prediction in decision trees.
+- Bootstrap sampling and ensemble aggregation in Random Forest.
+- Sequential residual correction in Gradient Boosting.
+- Distance calculation and neighbor aggregation in KNN.
+- Iterative optimization for SVR.
+
+The scope of manual implementation can differ by component. Using NumPy for numerical operations or established utilities for data transformation does not negate a from-scratch model implementation, provided the core learning algorithm itself is implemented by the project.
+
+### Reusable preprocessing
+
+The preprocessing modules separate data preparation from model-specific code.
+
+A reusable preprocessing workflow should consistently:
+
+1. Load the dataset.
+2. Remove unsuitable identifier columns.
+3. Separate features and target.
+4. Create data splits.
+5. Fit transformations on training data.
+6. Transform validation and test data using the fitted transformations.
+7. Preserve the order and names of processed features.
+8. Return appropriately aligned arrays or DataFrames.
+
+### Evaluation utilities
+
+Regression evaluation uses the following metrics.
+
+**Mean Absolute Error (MAE)**
+
+\[
+\mathrm{MAE}=\frac{1}{n}\sum_{i=1}^{n}|y_i-\hat y_i|
+\]
+
+MAE expresses the average absolute prediction error in the target's units.
+
+**Mean Squared Error (MSE)**
+
+\[
+\mathrm{MSE}=\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat y_i)^2
+\]
+
+MSE penalizes larger errors more heavily because the residuals are squared.
+
+**Root Mean Squared Error (RMSE)**
+
+\[
+\mathrm{RMSE}=\sqrt{\mathrm{MSE}}
+\]
+
+RMSE is expressed in the same units as the target and is more sensitive to large errors than MAE.
+
+**Coefficient of determination (R²)**
+
+\[
+R^2=1-\frac{\sum_{i=1}^{n}(y_i-\hat y_i)^2}
+{\sum_{i=1}^{n}(y_i-\bar y)^2}
+\]
+
+R² measures performance relative to predicting the evaluation-set mean. It can be negative when a model performs worse than that reference predictor.
+
+No single metric is sufficient for every use case. The project uses multiple metrics to understand average error, sensitivity to outliers, and overall fit.
+
+---
+
+## Installation and Setup
 
 ### Prerequisites
 
-- Python 3.10 or a compatible version.
-- Git.
-- A code editor such as VS Code.
-- The required Python libraries.
+- Python 3.x
+- pip
+- Jupyter Notebook or JupyterLab
+- Git, if cloning the repository
 
-### Step 1: Clone the Repository
+The exact minimum Python version and package versions should be documented once the environment has been finalized.
 
-Replace the placeholder with the actual GitHub repository URL.
+### 1. Clone the repository
 
-```bash
-git clone git@github.com:ashishkrsingh21/House-Price-Prediction.git
-```
-
-### Step 2: Enter the Project Directory
+Replace the placeholder below with the actual repository URL.
 
 ```bash
+git clone <YOUR_REPOSITORY_URL>
 cd House-Price-Prediction
 ```
 
-### Step 3: Create a Virtual Environment
+### 2. Create a virtual environment
 
 ```bash
 python -m venv .venv
@@ -821,440 +772,250 @@ On Windows:
 .venv\Scripts\activate
 ```
 
-### Step 4: Install Dependencies
+### 3. Install dependencies
 
-If `requirements.txt` is available:
+If the repository contains a maintained `requirements.txt`:
 
 ```bash
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### Step 5: Download the Dataset
+The dependency list should reflect the actual imports in the project, including the numerical, data-processing, visualization, notebook, and evaluation packages used by the implementation.
 
-Download the dataset from:
+### 4. Prepare the dataset
 
-https://www.kaggle.com/competitions/indian-urban-house-price-prediction/data
+Place the downloaded training dataset at the path expected by the data loader:
 
-Place the relevant files in the appropriate project directory and update the file paths in the notebooks or scripts if necessary.
+```text
+data/train.csv
+```
+
+The dataset is not assumed to be bundled with the repository. Follow the dataset's licensing and redistribution terms.
+
+### 5. Verify the environment
+
+```bash
+python --version
+python -m pip list
+```
+
+If imports fail, check that the virtual environment is active and that the installed package versions are compatible with the project.
 
 ---
 
-## 13. Running the Project
+## Running the Project
 
-Execution commands depend on the actual filenames and how each module is implemented.
+The exact execution commands depend on the current repository structure and the entry points implemented in the source modules.
 
-If the source files support direct execution, the commands may follow this pattern:
-
-```bash
-python src/Linear_Regression.py
-```
+### Explore the dataset
 
 ```bash
-python src/Tree_Regression.py
+jupyter notebook
 ```
 
-```bash
-python src/Random_Forest.py
-```
+Open `01_data_exploration.ipynb` and run the cells in order.
 
-```bash
-python src/knn_Regression.py
-```
+### Review data cleaning
 
-After Gradient Boosting has been implemented:
+Open `02_data_cleaning.ipynb` and execute the cleaning workflow after confirming the expected input and output paths.
 
-```bash
-python src/Gradient_Boosting_Regression.py
-```
+### Run model experiments
 
-These commands assume that the corresponding files exist and support direct execution.
+Open `03_model_training.ipynb` and execute the model-training and evaluation cells.
 
-The notebooks can also be used for exploratory analysis, training, and evaluation.
+If the repository contains additional model-specific notebooks or scripts, use their documented entry points.
+
+**Important:** The commands above describe the notebook-based workflow. They do not imply that a unified command-line training pipeline or a deployed prediction application has already been implemented.
 
 ---
 
-## 14. House Price Prediction Plan
+## Results and Experiment Tracking
 
-The roadmap describes the intended development of the project beyond the currently implemented models.
+The project records model configurations and metrics so that different experiments can be compared and reproduced.
 
-### Phase 1: Foundational Regression Models
+A useful experiment record should contain:
 
-**Status: Completed**
-
-#### 1. Linear Regression
-
-- Establish a baseline.
-- Understand the regression objective.
-- Investigate feature selection.
-- Experiment with target transformations.
-
-#### 2. Decision Tree Regression
-
-- Understand recursive feature splitting.
-- Investigate nonlinear relationships.
-- Study tree complexity.
-- Analyze overfitting and underfitting.
-
-#### 3. Random Forest Regression
-
-- Understand ensemble learning.
-- Investigate bootstrap sampling.
-- Study bagging.
-- Investigate variance reduction.
-- Tune tree parameters.
-
-### Phase 2: Distance-Based Regression
-
-**Status: Implemented**
-
-#### 4. K-Nearest Neighbors Regression
-
-- Understand distance-based prediction.
-- Investigate feature scaling.
-- Tune the number of neighbors.
-- Compare feature configurations.
-- Analyze prediction errors.
-
-### Phase 3: Boosting
-
-**Status: In Progress**
-
-#### 5. Gradient Boosting Regression
-
-**Planned source module:** `src/Gradient_Boosting_Regression.py`
-
-Development will proceed module by module.
-
-**Module 1: Mathematical Foundations**
-
-- Boosting versus bagging.
-- Additive models.
-- Loss functions.
-- Residuals and negative gradients.
-- Weak learners.
-- Learning rate.
-- Number of boosting stages.
-
-**Module 2: Algorithm Design**
-
-- Initial prediction.
-- Calculation of the negative gradient.
-- Training a regression tree.
-- Updating the ensemble.
-- Understanding the mathematical objective.
-
-**Module 3: Implementation**
-
-- Create the source module.
-- Implement training and prediction.
-- Establish a baseline configuration.
-- Evaluate the model.
-- Record the experiment.
-
-**Module 4: Hyperparameter Experiments**
-
-Investigate:
-
-- `n_estimators`
-- `learning_rate`
-- `max_depth`
-- `min_samples_split`
-- `min_samples_leaf`
-- `subsample`
-
-**Module 5: Evaluation**
-
-Compare Gradient Boosting with existing models using MAE, RMSE, R², and price-group error analysis.
-
-**Module 6: Interpretation**
-
-Investigate generalization, overfitting, prediction errors, and whether the model provides a meaningful improvement.
-
-### Phase 4: Advanced Boosting Algorithms
-
-**Status: Planned**
-
-#### 6. XGBoost Regression
-
-Topics:
-
-- Regularized boosting.
-- First- and second-order optimization.
-- Tree construction.
-- Feature and row subsampling.
-- Hyperparameter tuning.
-
-#### 7. LightGBM Regression
-
-Topics:
-
-- Histogram-based learning.
-- Leaf-wise tree growth.
-- Computational efficiency.
-- Model optimization.
-
-#### 8. CatBoost Regression
-
-Topics:
-
-- Categorical feature handling.
-- Ordered boosting.
-- Regularization.
-- Performance on mixed numerical and categorical data.
-
-These algorithms will be evaluated against existing models rather than assumed to be better.
-
-### Phase 5: Additional Regression Models
-
-**Status: Optional Future Work**
-
-Potential models include:
-
-- Support Vector Regression.
-- Ridge Regression.
-- Lasso Regression.
-- Elastic Net.
-- Extra Trees Regression.
-
-These models can provide additional insight into regularization, nonlinear regression, and randomized ensembles.
-
-### Phase 6: Robust Model Evaluation
-
-**Status: Planned**
-
-- Establish consistent evaluation procedures.
-- Introduce cross-validation.
-- Tune hyperparameters using validation data.
-- Compare models using MAE, RMSE, and R².
-- Analyze residuals.
-- Evaluate price-group performance.
-- Investigate model stability.
-- Select a final candidate.
-- Evaluate it on the held-out test set.
-
-### Phase 7: Final Prediction Pipeline
-
-**Status: Planned**
-
-Develop a reusable prediction pipeline that includes:
-
-- Input validation.
-- Numerical preprocessing.
-- Categorical encoding.
-- Feature transformations.
-- Model loading.
-- Price prediction.
-- Output formatting.
-
-The preprocessing steps used during training must be reproduced during prediction.
-
-### Phase 8: Deployment
-
-**Status: Optional Future Work**
-
-Potential deployment approaches include:
-
-- Command-line prediction.
-- Streamlit application.
-- Flask API.
-- FastAPI service.
-- Web interface for entering property characteristics.
-
-Deployment should follow model evaluation and pipeline development.
-
-### Roadmap Summary
-
-| Component | Status |
+| Field | Purpose |
 |---|---|
-| Linear Regression | Completed |
-| Decision Tree Regression | Completed |
-| Random Forest Regression | Completed |
-| KNN Regression | Completed |
-| Gradient Boosting Regression | In Progress |
-| XGBoost Regression | Planned |
-| LightGBM Regression | Planned |
-| CatBoost Regression | Planned |
-| Additional Regression Models | Planned |
-| Cross-Validation and Model Comparison | Planned |
-| Final Prediction Pipeline | Planned |
-| Deployment | Optional |
+| Model | Algorithm name |
+| Target | Raw or transformed target |
+| Feature configuration | Predictors used by the experiment |
+| Hyperparameters | Model settings |
+| Train metrics | Training-set performance |
+| Validation metrics | Performance used for model selection |
+| Test metrics | Final evaluation on held-out data |
+| Random seed | Reproducibility where relevant |
+| Experiment notes | Observations, warnings, or changes |
+
+The project has discussed recording results in `report/model_results.csv`. Its presence and current schema should be verified in the repository.
+
+For reliable comparisons, each experiment should have a distinct record rather than overwriting previous configurations. The README's performance table should be updated only when the corresponding metric values and evaluation setup are known.
 
 ---
 
-## 15. Challenges and Lessons Learned
+## Challenges and Lessons Learned
 
-### Feature Selection
+Developing the project has exposed practical issues that are not apparent from studying algorithm equations alone.
 
-More features do not necessarily improve predictive performance.
+### 1. Data indexing and alignment
 
-A feature may contain redundant or weak information when considered alongside other variables.
+Combining NumPy index arrays with pandas Series can lead to unexpected indexing behavior. Positional indices and pandas index labels are not interchangeable.
 
-The project evaluates different feature configurations rather than assuming that every original feature must be retained.
+The implementation must ensure that sampled rows and target values remain correctly aligned, particularly when creating bootstrap datasets and selecting nearest neighbors.
 
-### Nonlinear Relationships
+### 2. Feature consistency
 
-Linear Regression may not represent complex nonlinear relationships adequately.
+One-hot encoding and feature selection can produce matrices with different numbers of columns. A model trained with one feature configuration cannot safely be evaluated using an incompatible matrix.
 
-Decision Trees and ensemble methods can capture nonlinear patterns through feature-based partitions and combinations of learners.
+Feature ordering and transformation state must be preserved throughout training and inference.
 
-### Overfitting
+### 3. Overfitting in decision trees
 
-A complex model may fit training observations closely but perform poorly on unseen observations.
+Increasing tree depth can improve training performance while harming generalization. Depth, leaf size, and split constraints must be tuned together.
 
-Controlling model complexity and using validation procedures help evaluate generalization.
+### 4. Computational cost
 
-### Feature Scaling
+Manual implementations can be expensive on datasets containing tens of thousands of observations. The Gradient Boosting experiments demonstrated that extensive hyperparameter searches can require substantial runtime.
 
-Distance-based algorithms can be sensitive to feature scale.
+Future tuning should use validation-based selection, bounded search spaces, sensible stopping criteria, and efficient numerical operations.
 
-Scaling is important for KNN, while tree-based algorithms generally do not require standardization.
+### 5. Outliers and skewed targets
 
-### Error Analysis
+A small number of expensive properties can dominate squared-error metrics. Overall model performance should be supplemented with price-segment and locality-level error analysis.
 
-Overall metrics may hide systematic weaknesses.
+### 6. Numerical stability
 
-Analyzing signed errors and price groups helps identify underprediction, overprediction, and segments where model performance deteriorates.
+Matrix operations, poorly scaled inputs, redundant features, and optimization settings can affect stability and convergence. A historical condition-number observation of approximately 231.14 motivated further attention to feature scaling and redundancy, but this value should not be interpreted as a universal property of every processed dataset.
 
-### Reproducibility
+### 7. Evaluation discipline
 
-Experiment configurations and results should be recorded consistently.
+Results from different experiments are not automatically comparable. Changes in the feature set, target transformation, data split, and hyperparameters can all affect reported metrics.
 
-This makes it easier to identify why a model improved or deteriorated and prevents conclusions based on uncontrolled comparisons.
-
----
-
-## 16. Future Improvements
-
-### Modeling
-
-- Complete Gradient Boosting Regression.
-- Investigate advanced boosting algorithms.
-- Explore regularized regression.
-- Evaluate alternative feature configurations.
-- Investigate useful nonlinear transformations.
-
-### Evaluation
-
-- Introduce cross-validation.
-- Preserve an untouched test set.
-- Compare MAE, RMSE, and R².
-- Analyze residual distributions.
-- Evaluate errors across price groups.
-- Investigate performance stability.
-
-### Data Quality
-
-- Validate feature ranges.
-- Check missing values.
-- Investigate duplicate observations.
-- Verify categorical encoding.
-- Prevent target leakage.
-- Examine the effects of extreme observations.
-
-### Engineering
-
-- Improve code modularity.
-- Standardize experiment records.
-- Save model configurations and metrics.
-- Build a reusable preprocessing pipeline.
-- Record dependency versions.
-- Document execution instructions.
-
-### Deployment
-
-- Save the selected model.
-- Build a prediction interface.
-- Validate user inputs.
-- Return predictions in clearly defined units.
-- Document model limitations.
+A controlled experiment log is essential for selecting a model based on evidence rather than isolated scores.
 
 ---
 
-## 17. Project Status
+## Limitations
 
-The project has progressed through foundational regression algorithms and is moving toward boosting methods.
+The project has several limitations that should be considered when interpreting the results.
 
-| Component | Status |
-|---|---|
-| Exploratory Data Analysis | Completed |
-| Data Cleaning and Preprocessing | Completed |
-| Feature Selection Experiments | Ongoing |
-| Linear Regression | Completed |
-| Decision Tree Regression | Completed |
-| Random Forest Regression | Completed |
-| KNN Regression | Completed |
-| Gradient Boosting Regression | In Progress |
-| Advanced Boosting Algorithms | Planned |
-| Robust Model Comparison | Planned |
-| Final Prediction Pipeline | Planned |
-| Deployment | Optional Future Work |
+1. **Dataset representativeness:** The dataset may not reflect every Indian housing market, property category, or current market condition.
+2. **Extreme-value prediction:** The most expensive properties remain challenging, particularly when their characteristics are poorly represented in training data.
+3. **Feature limitations:** Important pricing variables may be unavailable, incomplete, or insufficiently detailed.
+4. **Model comparability:** Historical results were generated across different experimental configurations and require a common evaluation run before final ranking.
+5. **Generalization:** Good performance on a random held-out split does not guarantee equivalent performance on future listings or unseen cities.
+6. **Manual implementation trade-offs:** From-scratch implementations are valuable for learning, but may lack the optimizations, numerical safeguards, and edge-case handling of mature production libraries.
+7. **Deployment status:** A production API, web interface, automated retraining system, and monitoring pipeline should not be considered complete unless they are explicitly implemented and tested.
+
+The outputs are intended for machine learning experimentation and educational purposes. They should not be treated as certified property valuations or financial advice.
 
 ---
 
-## 18. Learning Outcomes
+## Future Work
 
-The project aims to develop practical and mathematical understanding of:
+The roadmap is designed to extend the existing work without treating planned experiments as completed implementations.
 
-- Supervised learning.
-- Regression objectives.
-- Linear and nonlinear models.
-- Decision tree construction.
-- Bootstrap sampling.
-- Bagging and boosting.
-- Bias-variance trade-off.
-- Feature selection.
-- Feature scaling.
-- Categorical encoding.
-- Hyperparameter optimization.
-- Model evaluation.
-- Residual analysis.
-- Cross-validation.
-- Generalization.
-- Data leakage prevention.
-- Reproducible machine learning workflows.
+### Phase 1 — Consolidate the current project
 
-The emphasis is on understanding why algorithms work, how they behave, and when they are appropriate.
+- [ ] Verify the final repository structure and remove duplicated preprocessing logic.
+- [ ] Standardize the model interfaces.
+- [ ] Establish a reproducible train/validation/test workflow.
+- [ ] Ensure every model uses a documented feature configuration.
+- [ ] Finalize a baseline and record its metrics.
+- [ ] Run the current models under a common evaluation protocol.
+- [ ] Consolidate the results into a consistent experiment log.
+- [ ] Add automated tests for data loading, transformations, and model predictions.
+
+### Phase 2 — Improve the current models
+
+- [ ] Investigate the high-price prediction errors.
+- [ ] Evaluate alternative feature configurations systematically.
+- [ ] Compare raw-target and log-target experiments.
+- [ ] Tune model hyperparameters using validation data or cross-validation.
+- [ ] Investigate regularization for linear regression.
+- [ ] Examine feature importance and model interpretability.
+- [ ] Evaluate relative errors alongside absolute errors.
+- [ ] Analyze residuals for systematic patterns.
+
+### Phase 3 — Extend the algorithm portfolio
+
+Potential future models include:
+
+- [ ] Ridge Regression — study L2 regularization and coefficient stability.
+- [ ] Lasso Regression — investigate L1 regularization and feature selection.
+- [ ] AdaBoost Regression — study sequential reweighting and ensemble learning.
+- [ ] XGBoost — compare an optimized gradient-boosting implementation against the manual version.
+- [ ] HistGradientBoosting or another efficient boosting implementation — evaluate computational efficiency and predictive performance.
+- [ ] Kernel Ridge Regression — investigate nonlinear kernel-based regression.
+- [ ] Improved SVR optimization — investigate convergence, computational cost, and regularization.
+- [ ] Robust regression — assess methods less sensitive to extreme observations.
+
+These are proposed extensions, not claims that the algorithms have already been completed.
+
+### Phase 4 — Improve software engineering
+
+- [ ] Create a consistent configuration system for experiments.
+- [ ] Separate data preparation, model training, evaluation, and reporting.
+- [ ] Add unit tests and integration tests.
+- [ ] Record random seeds and environment information.
+- [ ] Add structured logging and error handling.
+- [ ] Create a repeatable training entry point.
+- [ ] Save model artifacts and the preprocessing objects required for inference.
+- [ ] Document the model-selection procedure.
+
+### Phase 5 — Deployment and practical use
+
+- [ ] Build a prediction interface for property characteristics.
+- [ ] Add input validation and consistent feature transformations.
+- [ ] Expose predictions through a simple API or web application.
+- [ ] Document model limitations and prediction uncertainty.
+- [ ] Evaluate performance on new data when available.
+- [ ] Consider monitoring data drift and model degradation.
+
+Deployment is a future objective unless the corresponding components are implemented and validated.
 
 ---
 
-## 19. Dataset Reference
+## Contributing
 
-**Indian Urban House Price Prediction — Kaggle**
+Contributions and suggestions are welcome.
 
-Competition and dataset page:
+A useful contribution should:
 
-https://www.kaggle.com/competitions/indian-urban-house-price-prediction
+1. Describe the problem or improvement.
+2. Explain the relevant algorithm or design decision.
+3. Include reproducible steps where possible.
+4. Preserve the distinction between training, validation, and test data.
+5. Include appropriate tests for changes to reusable modules.
+6. Report experimental results with the associated feature configuration and hyperparameters.
 
-Dataset files:
-
-https://www.kaggle.com/competitions/indian-urban-house-price-prediction/data
-
-The dataset is synthetic and intended for machine learning experimentation.
-
-The competition uses Root Mean Squared Error (RMSE) as its evaluation metric.
-
-For local experiments, evaluation should follow the project's documented train-validation-test procedure.
+For major algorithm changes, comparisons should use the same evaluation protocol as the existing implementation.
 
 ---
 
-## 20. License
+## License
 
-The repository's code license should be specified separately in a `LICENSE` file.
+A license has not been specified in the project information available for this README.
 
-Before redistributing the dataset, verify its current license and usage conditions on Kaggle.
-
-The code license and dataset license may differ. Do not assume that the code license automatically applies to the dataset.
+Before publishing the repository, add a `LICENSE` file that reflects the intended reuse terms. Also verify the dataset's license and redistribution conditions separately; a code license does not automatically grant rights to redistribute third-party data.
 
 ---
 
-## Conclusion
+## Acknowledgements
 
-This project explores house-price prediction through systematic implementation and evaluation of supervised regression algorithms.
+- **Kaggle** — for hosting the Indian Urban House Price Prediction dataset.
+- The open-source Python ecosystem — for numerical computation, data processing, visualization, and notebook-based development.
+- Educational resources on statistics, regression, optimization, and machine learning that support the theoretical and practical study of these algorithms.
 
-It progresses from foundational models such as Linear Regression and Decision Tree Regression to ensemble approaches such as Random Forest and Gradient Boosting.
+---
 
-The immediate next step is completing Gradient Boosting Regression and comparing its performance against the existing models.
+## Project Status
 
-The broader objective is to develop a reliable prediction pipeline through mathematical understanding, controlled experimentation, feature engineering, and rigorous evaluation.
+**Current stage: Model development, hyperparameter experimentation, and evaluation consolidation.**
 
-**The guiding principle is to understand the algorithm, implement it, evaluate it, analyze its errors, and use evidence to determine whether it improves the project.**
+The project has progressed through data exploration, preprocessing, and multiple regression implementations, including Linear Regression, Decision Tree Regression, Random Forest Regression, Gradient Boosting Regression, KNN Regression, and SVR experiments.
+
+The next priority is to establish a reproducible and comparable evaluation of the existing models, investigate errors on expensive properties, and finalize the project structure before extending the model portfolio or developing a deployment interface.
+
+This README will evolve alongside the repository. Model results, implementation status, and the directory structure should be updated when the corresponding changes have been completed and verified.
