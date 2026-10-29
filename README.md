@@ -254,7 +254,7 @@ The following values are available in the recorded project history. They are inc
 | Random Forest | 33.4593 | 69.1857 | 0.7838 |
 | Gradient Boosting | 35.3533 | 69.0814 | 0.7787 |
 | KNN | 34.7310 | 71.3325 | 0.7702 |
-| SVR | 32.2 | 68.927 | 0.7854 |
+| SVR | 32.2000 | 68.9270 | 0.7854 |
 
 **Comparability limitation:** These results come from historical experiments. The available history does not establish that all rows use the same feature set, preprocessing pipeline, target representation, split, or evaluation protocol. The table must not be used as a definitive model ranking.
 
