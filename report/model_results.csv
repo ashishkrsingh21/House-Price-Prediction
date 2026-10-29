@@ -1,6 +1,6 @@
 Model,Target,Feature_Configuration,Hyperparameters,MAE,RMSE,R2
 Linear Regression,Log price,Super_Area + Super_Area² + Age_of_Property + Distance_to_City_Center_km + City + Locality + City x Locality,{None},32.1584,68.3593,0.7889
-Decision Tree,Raw Price,Super_Area + Age_of_Property + Distance_to_City_Center_km + City + Locality,"{""max_depth"": 8, ""min_samples_split"": 2, ""min_samples_leaf"": 50}",38.3398,74.3206,0.750517
+Decision Tree,Raw Price,Super_Area + Age_of_Property + Distance_to_City_Center_km + City + Locality,"{""max_depth"": 8, ""min_samples_split"": 2, ""min_samples_leaf"": 50}",38.3398,74.3206,0.7505
 Random Forest,Raw Price,Super_Area + Carpet_Area + Age_of_Property + Distance_to_City_Center_km + City + Locality,"{""n_estimators"": 150, ""max_depth"": 15, ""min_samples_split"": 50, ""min_samples_leaf"": 10, ""max_features"": 20}",33.4593,69.1857,0.7838
 Gradient Boosting,Raw Price,Super_Area + Carpet_Area + Age_of_Property + Distance_to_City_Center_km + City + Locality,"{""n_estimators"": 690, ""learning_rate"": 0.2, ""max_depth"": 2, ""min_samples_split"": 2, ""min_samples_leaf"": 6, ""max_features"": null}",33.6627,69.3006,0.783
 KNN Regression,Raw Price,Super_Area + LocalityDistance_to_City_Center_km + City,"{""n_neighbors"": 10, ""weights"": ""distance""}",34.9403,71.4367,0.7695
