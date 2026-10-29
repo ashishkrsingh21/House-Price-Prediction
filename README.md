@@ -146,7 +146,8 @@ House-Price-Prediction/
 ├── notebooks/
 │   ├── 01_data_exploration.ipynb
 │   ├── 02_data_cleaning.ipynb
-│   └── 03_model_training.ipynb
+│   ├── 03_model_training.ipynb
+│   └── 04_model_evaluation.ipynb
 ├── report/
 │   └── model_results.csv
 ├── src/
@@ -236,6 +237,7 @@ The project evaluates regression models using several complementary metrics.
 | Metric | Interpretation |
 |---|---|
 | MAE | Mean absolute prediction error, in the target's units |
+| MSE | Mean signed sum prediction error, in the target's units |
 | RMSE | Square root of MSE, expressed in the target's units |
 | R² | Proportion of target variance explained relative to a mean-prediction baseline |
 
@@ -252,7 +254,7 @@ The following values are available in the recorded project history. They are inc
 | Random Forest | 33.4593 | 69.1857 | 0.7838 |
 | Gradient Boosting | 35.3533 | 69.0814 | 0.7787 |
 | KNN | 34.7310 | 71.3325 | 0.7702 |
-| SVR | ongoing | ongoing | ongoin |
+| SVR | 32.2 | 68.927 | 0.7854 |
 
 **Comparability limitation:** These results come from historical experiments. The available history does not establish that all rows use the same feature set, preprocessing pipeline, target representation, split, or evaluation protocol. The table must not be used as a definitive model ranking.
 
